@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { TodoAddComponent } from './todo-add/todo-add.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { MatchEntryComponent } from './match-entry/match-entry.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
@@ -28,6 +29,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
         component: TodoAddComponent,
         data: {
           title: 'Add Todo'
+        }
+      },
+      //Match Add
+      {
+        path: 'matchAdd',
+        component: MatchEntryComponent,
+        data: {
+          title: 'Add Match'
         }
       },
       // Home Page
@@ -50,6 +59,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AppComponent,
     TodoAddComponent,
     TodoListComponent,
+    MatchEntryComponent,
     PageNotFoundComponent
   ],
   bootstrap: [

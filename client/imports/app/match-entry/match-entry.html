@@ -1,0 +1,50 @@
+<a routerLink="/matchList">List</a>
+<fieldset>
+  <legend>Add Match</legend>
+  <label for="tOneOff">
+    Team One Offense
+  </label>
+  <input [(ngModel)]="tOneOff">
+  <br>
+  <label for="tOneDef">
+    Team One Defense
+  </label>
+  <input [(ngModel)]="tOneDef">
+  <br>
+  <label for="tTwoOff">
+    Team Two Offense
+  </label>
+  <input [(ngModel)]="tTwoOff">
+  <br>
+  <label for="tTwoDef">
+    Team Two Defense
+  </label>
+  <input [(ngModel)]="tTwoDef">
+  <br>
+  <label for="tOneRotate">
+    Team One Rotate
+  </label>
+  <input [(ngModel)]="tOneRotate">
+  <br>
+  <label for="tTwoRotate">
+    Team Two Rotate
+  </label>
+  <input [(ngModel)]="tTwoRotate">
+  <br>
+  <label for="tOneWin">
+    Team One Win
+  </label>
+  <input [(ngModel)]="tOneWin">
+  <br>
+  <label for="wScore">
+    Winning Score
+  </label>
+  <input [(ngModel)]="wScore">
+  <br>
+  <label for="lScore">
+    Losing Score
+  </label>
+  <input [(ngModel)]="lScore">
+
+  <button (click)="addMatchStats()">Add Match</button>
+</fieldset>
