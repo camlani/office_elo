@@ -1,4 +1,4 @@
-export interface MatchStats {
+export interface MatchStat {
     id?: string;
     tOneOff?: string;
     tOneDef?: string;

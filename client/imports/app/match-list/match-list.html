@@ -1,0 +1,7 @@
+<a routerLink="/matchAdd">Add</a>
+<ul>
+  <li *ngFor="let match of matchstats | async">
+    {{match.tOneOff}} and {{match.tOneDef}} vs {{match.tTwoOff}} and {{match.tTwoDef}}
+    <button (click)="removeMatchStat(match._id)" class="deleteBtn">Delete</button>
+  </li>
+</ul>

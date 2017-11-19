@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { TodoAddComponent } from './todo-add/todo-add.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { MatchEntryComponent } from './match-entry/match-entry.component';
+import { MatchListComponent } from './match-list/match-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
@@ -39,10 +40,17 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
           title: 'Add Match'
         }
       },
+      {
+        path: 'matchList',
+        component: MatchListComponent,
+        data: {
+          title: 'Match List'
+        }
+      },
       // Home Page
       {
         path: '',
-        redirectTo: '/todoList',
+        redirectTo: '/matchList',
         pathMatch: 'full'
       },
       // 404 Page
@@ -60,6 +68,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     TodoAddComponent,
     TodoListComponent,
     MatchEntryComponent,
+    MatchListComponent,
     PageNotFoundComponent
   ],
   bootstrap: [
