@@ -1,4 +1,4 @@
-# Angular2-Meteor Boilerplate
+# Office Elo Derived from Angular2-Meteor Boilerplate
 
 [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular2-meteor-base/badges/score.svg)](https://www.bithound.io/github/Urigo/angular2-meteor-base) [![bitHound Dependencies](https://www.bithound.io/github/Urigo/angular2-meteor-base/badges/dependencies.svg)](https://www.bithound.io/github/Urigo/angular2-meteor-base/master/dependencies/npm)
 
