@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-
 import { Meteor } from 'meteor/meteor';
 
 @Component({
     selector: 'match-entry',
-    templateUrl: 'match-entry.html'
+    templateUrl: 'match-entry.html',
+    styleUrls: ['match-entry.scss']
   })
   export class MatchEntryComponent {
     tOneOff: string;

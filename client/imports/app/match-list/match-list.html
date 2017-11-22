@@ -1,4 +1,9 @@
-<a routerLink="/matchAdd">Add</a>
+
+
+<button routerLink="/matchAdd">Add New Match</button>
+<div class="col-md-4">
+  <h3>Match List</h3>
+</div>
 <ul>
   <li *ngFor="let match of matchstats | async">
     {{match.tOneOff}} and {{match.tOneDef}} vs {{match.tTwoOff}} and {{match.tTwoDef}}
