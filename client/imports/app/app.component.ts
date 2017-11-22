@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app',
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  styleUrls: ['app.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
   //Dynamic title change along with router

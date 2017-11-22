@@ -12,6 +12,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { MatchEntryComponent } from './match-entry/match-entry.component';
 import { MatchListComponent } from './match-list/match-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     TodoListComponent,
     MatchEntryComponent,
     MatchListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NavBarComponent
   ],
   bootstrap: [
     AppComponent

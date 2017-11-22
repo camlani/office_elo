@@ -1,4 +1,4 @@
-<a routerLink="/matchList">List</a>
+<h1>Match Entry</h1>
 <fieldset>
   <legend>Add Match</legend>
   <label for="tOneOff">
@@ -45,6 +45,6 @@
     Losing Score
   </label>
   <input [(ngModel)]="lScore">
-
-  <button (click)="addMatchStats()">Add Match</button>
+  <br><br>
+  <button (click)="addMatchStats()" class="btn btn-primary">Add Match</button>
 </fieldset>
