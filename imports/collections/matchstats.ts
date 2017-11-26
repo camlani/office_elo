@@ -1,5 +1,17 @@
 import { MongoObservable } from 'meteor-rxjs';
+import { Meteor } from 'meteor/meteor';
 
-import { MatchStats } from '../models/matchstats.ts';
+import { MatchStat } from '../models/matchstat';
 
-export const MatchStats = new MongoObservable.Collection<MatchStats>('MatchStats');
+export const MatchStats = new MongoObservable.Collection<MatchStat>('MatchStats');
+
+function loggedIn() {
+    return !!Meteor.user();
+
+}
+
+MatchStats.allow({
+    insert: loggedIn,
+    update: loggedIn,
+    remove: loggedIn
+})

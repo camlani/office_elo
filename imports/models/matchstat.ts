@@ -8,7 +8,8 @@ export interface MatchStat {
     tTwoRotate?: boolean;
     mTime?: Date;
     tOneWin?: boolean;
-    wScore?: int;
-    lScore?: int;
+    wScore?: number;
+    lScore?: number;
     verif?: boolean;
+    userEntry?: string;
   }

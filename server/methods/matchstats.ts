@@ -16,7 +16,8 @@ Meteor.methods({
     tOneWin: matchDetails.tOneWin,
     wScore: matchDetails.wScore,
     lScore: matchDetails.lScore,
-    verif: matchDetails.verif
+    verif: matchDetails.verif,
+    userEntry: matchDetails.userEntry
 
    });
   },

@@ -13,6 +13,10 @@ import { MatchEntryComponent } from './match-entry/match-entry.component';
 import { MatchListComponent } from './match-list/match-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AccountsModule } from 'angular2-meteor-accounts-ui';
+
+import { AuthGuard } from './services/auth-guard/auth-guard.service';
+
 
 @NgModule({
   imports: [
@@ -39,7 +43,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
         component: MatchEntryComponent,
         data: {
           title: 'Add Match'
-        }
+        },
+        canActivate:[AuthGuard]
       },
       {
         path: 'matchList',
@@ -62,7 +67,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
           title: '404 Page Not Found'
         }
       }
-    ])
+    ]),
+    AccountsModule
   ],
   declarations: [
     AppComponent,
@@ -75,6 +81,10 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   ],
   bootstrap: [
     AppComponent
+  ],
+  providers: [
+    AuthGuard
   ]
 })
+
 export class AppModule { }

@@ -14,9 +14,13 @@ import { Meteor } from 'meteor/meteor';
     tOneRotate: boolean;
     tTwoRotate: boolean;
     tOneWin: boolean;
-    wScore: int;
-    lScore: int;
+    wScore: number;
+    lScore: number;
     addMatchStats() {
+        if(!Meteor.userId()){
+            alert('Please log in to add a match');
+            return;
+        }
         var objecttoInsert = {
             tOneOff: this.tOneOff,
             tOneDef: this.tOneDef,
@@ -28,10 +32,11 @@ import { Meteor } from 'meteor/meteor';
             tOneWin: this.tOneWin,
             wScore: this.wScore,
             lScore: this.lScore,
-            verif: false
+            verif: false,
+            userEntry: Meteor.userId()
+
         }  
         Meteor.call('addMatchStats', objecttoInsert);
-        this.content = null;
         this.tOneOff = null;
         this.tOneDef = null;
         this.tTwoOff = null;
