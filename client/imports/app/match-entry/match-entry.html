@@ -1,5 +1,7 @@
+
 <h1>Match Entry</h1>
-<fieldset>
+<div *ngIf="!user">Please, log in to add match</div>
+<fieldset *ngIf="user">
   <legend>Add Match</legend>
   <label for="tOneOff">
     Team One Offense

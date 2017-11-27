@@ -7,10 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { TodoAddComponent } from './todo-add/todo-add.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
 import { MatchEntryComponent } from './match-entry/match-entry.component';
 import { MatchListComponent } from './match-list/match-list.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AccountsModule } from 'angular2-meteor-accounts-ui';
@@ -23,20 +23,6 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      {
-        path: 'todoList',
-        component: TodoListComponent,
-        data: {
-          title: 'Todo List'
-        }
-      },
-      {
-        path: 'todoAdd',
-        component: TodoAddComponent,
-        data: {
-          title: 'Add Todo'
-        }
-      },
       //Match Add
       {
         path: 'matchAdd',
@@ -52,6 +38,20 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
         data: {
           title: 'Match List'
         }
+      },
+      {
+        path: 'signup',
+        component: SignupFormComponent,
+        data: {
+          title: 'Sign Up'
+        } 
+      },
+      {
+        path: 'login',
+        component: LoginFormComponent,
+        data: {
+          title: 'Log In'
+        } 
       },
       // Home Page
       {
@@ -72,12 +72,12 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
   ],
   declarations: [
     AppComponent,
-    TodoAddComponent,
-    TodoListComponent,
     MatchEntryComponent,
     MatchListComponent,
     PageNotFoundComponent,
-    NavBarComponent
+    NavBarComponent,
+    SignupFormComponent,
+    LoginFormComponent
   ],
   bootstrap: [
     AppComponent

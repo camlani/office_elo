@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "stripInternal": true,
     "noImplicitAny": false
+    
   },
   "include": [
     "imports/**/*.ts",

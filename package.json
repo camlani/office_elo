@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run --settings settings.json"
   },
   "dependencies": {
     "@angular/animations": "^4.4.6",

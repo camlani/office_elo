@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { InjectUser } from 'angular2-meteor-accounts-ui';
 
 import { Meteor } from 'meteor/meteor';
 
@@ -6,7 +7,8 @@ import { Meteor } from 'meteor/meteor';
     selector: 'match-entry',
     templateUrl: 'match-entry.html'
   })
-  export class MatchEntryComponent {
+@InjectUser('user')
+  export class MatchEntryComponent implements OnInit{
     tOneOff: string;
     tOneDef: string;
     tTwoOff: string;
@@ -16,6 +18,11 @@ import { Meteor } from 'meteor/meteor';
     tOneWin: boolean;
     wScore: number;
     lScore: number;
+    user: Meteor.User;
+
+    ngOnInit(){
+        console.log(this.user);
+    }
     addMatchStats() {
         if(!Meteor.userId()){
             alert('Please log in to add a match');

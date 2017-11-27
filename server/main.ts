@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { MatchStats } from '../imports/collections/matchstats';
+import './modules/configure-services.js';
 
 Meteor.startup(() => {
 

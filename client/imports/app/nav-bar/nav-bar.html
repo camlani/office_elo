@@ -17,10 +17,17 @@
           <li><a routerLink="">LFG</a></li>
           <li><a routerLink="">FAQ</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a routerLink="">Sign Up</a></li>
+        <ul [hidden]="user" class="nav navbar-nav navbar-right">
           <li><a><login-buttons></login-buttons></a></li>
+          <li><a routerLink="login">Log In</a></li>
+          <li><a routerLink="">Sign Up</a></li>
         </ul>
+        <ul [hidden]="!user" class="nav navbar-nav navbar-right">
+            <li><a><login-buttons></login-buttons></a></li>
+            <li><a (click)="logout()" >Log Out</a></li>
+            
+        </ul>
+
       </div>
     </div>
   </nav>
