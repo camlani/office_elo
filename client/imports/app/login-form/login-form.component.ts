@@ -16,12 +16,38 @@ declare var $: any;
   @InjectUser('user')
   export class LoginFormComponent implements OnInit {
     user: Meteor.User;
+    email: string;
+    password: string;
     ngOnInit() {
         //need to move this probably to on change as well
         //so when you click away from it, it will still be able to be reacted with
 
         //need to add the forms just like a Pintrest or Glass Door
-      console.log("modal")
-      $("#loginModal").modal()
+      console.log("login-page")   
+    }
+    submitUserPassword() {
+        console.log("Userpass " + this.email + " " + this.password )
+        Meteor.loginWithPassword(this.email, this.password, ( error ) => {
+            if ( error ) {
+              console.log("Not logged in")
+            } else {
+              console.log("Logged in")
+              //need to redirect here
+            }
+        });
+    }
+    loginWithGoogle(){
+        console.log("Google Pass");
+        var options = {
+            requestPermissions: [ 'email' ]
+          };
+        Meteor.loginWithGoogle(options, ( error ) => {
+            if ( error ) {
+              console.log("Not logged in")
+            } else {
+              console.log("Logged in")
+              //need to redirect here
+            }
+        });
     }
 }  
