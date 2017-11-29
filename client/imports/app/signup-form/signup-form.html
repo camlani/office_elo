@@ -2,10 +2,7 @@
         
     <h4>Sign Up</h4>
         <form>
-            <div class="form-group">
-                <label for="inputDisplayName">Display Name</label>
-                <input [(ngModel)]="displayName" name="text" type="text" class="form-control" id="inputDisplayName" placeholder="Display Name">
-            </div>
+
             <div class="form-group">
                 <label for="inputEmail">Email address</label>
                 <input [(ngModel)]="email" name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
@@ -13,6 +10,10 @@
             <div class="form-group">
                 <label for="inputPassword">Password</label>
                 <input [(ngModel)]="password" name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+            </div>
+            <div class="form-group">
+                    <label for="inputUserName">User Name</label>
+                    <input [(ngModel)]="userName" name="text" type="text" class="form-control" id="inputUserName" placeholder="User Name">
             </div>
             <button (click)="submitSignUpUserPassword()" class="btn btn-default">Sign Up</button>
             <img (click)="loginWithGoogle()" src="btn_google_signin_light_pressed_web@2x.png" class="img-responsive" alt="Responsive image">     

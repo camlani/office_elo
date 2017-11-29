@@ -15,7 +15,7 @@ import { MeteorObservable } from 'meteor-rxjs';
   @InjectUser('user')
   export class SignupFormComponent implements OnInit {
     user: Meteor.User;
-    displayName: string;
+    userName: string;
     email: string;
     password: string;
     ngOnInit() {
@@ -28,21 +28,35 @@ import { MeteorObservable } from 'meteor-rxjs';
       console.log("Userpass " + this.email + " " + this.password )
 
       var options = {
-        username: this.displayName,
+        username: this.userName,
         email: this.email,
         password: this.password
       }
 
       Accounts.createUser(options, (error)=> {
         if ( error ) {
-          console.log("Not logged in")
+          //console.log("Not logged in")
         } else {
-          console.log("Logged in")
+          //console.log("Logged in")
           //need to redirect here
         }
 
       });
 
   }
+  loginWithGoogle(){
+    console.log("Google Pass");
+    var options = {
+        requestPermissions: [ 'email' ]
+      };
+    Meteor.loginWithGoogle(options, ( error ) => {
+        if ( error ) {
+          //console.log("Not logged in")
+        } else {
+          //console.log("Logged in")
+          //need to redirect here
+        }
+    });
+}
 
 }  

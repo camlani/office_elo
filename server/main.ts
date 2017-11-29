@@ -32,14 +32,15 @@ Accounts.onCreateUser( ( options, user ) => {
         if ( profile ) {
             user.profile = profile;
         }
-    
+        user.displayname = "";
     } else {
-        const {name} = user.services.google;
-        user.username = name;
+        const {email, name} = user.services.google;
+        user.username = email;
+        user.displayname = name;
     }
 
 
-    user._id = Random.id();
+ 
 
     return user;
   });
