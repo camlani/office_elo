@@ -1,8 +1,9 @@
-<h1>Office Elo Placeholder</h1>
+<h1>CS RTP</h1>
 <div class="input-group stylish-input-group col-xs-12 col-md-12">
-    <input type="text" class="form-control"  placeholder="Search for a Player..." >
+    <input [(ngModel)]="searchValue" name="searchValue" type="text" (keyup.enter)="goToUserProfile()"
+        class="form-control"  placeholder="Search for a Player..." >
     <span class="input-group-addon">
-        <button type="submit">
+        <button (click)="goToUserProfile()">
             <span class="glyphicon glyphicon-search"></span>
         </button>  
     </span>

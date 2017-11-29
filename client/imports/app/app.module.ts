@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-
 import { BrowserModule } from '@angular/platform-browser';
-
 import { FormsModule } from '@angular/forms';
-
 import { RouterModule } from '@angular/router';
+import { AccountsModule } from 'angular2-meteor-accounts-ui';
 
 import { AppComponent } from './app.component';
 import { MatchEntryComponent } from './match-entry/match-entry.component';
@@ -13,11 +11,11 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { AccountsModule } from 'angular2-meteor-accounts-ui';
+import { HomePageComponent } from './home-page/home-page.component';
+import { ProfileComponent } from './profile/profile.component';
 
 import { AuthGuard } from './services/auth-guard/auth-guard.service';
 
-import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   imports: [
@@ -31,13 +29,6 @@ import { HomePageComponent } from './home-page/home-page.component';
           title: 'Add Match'
         },
         canActivate:[AuthGuard]
-      },
-      {
-        path: 'matchList',
-        component: MatchListComponent,
-        data: {
-          title: 'Match List'
-        }
       },
       {
         path: 'signup',
@@ -58,6 +49,13 @@ import { HomePageComponent } from './home-page/home-page.component';
         component: HomePageComponent,
         data: {
           title: 'Home'
+        }
+      },
+      {
+        path: 'profile/:username',
+        component: ProfileComponent,
+        data: {
+          title: 'Profile'
         }
       },
       // Home Page Redirect
@@ -85,7 +83,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     NavBarComponent,
     SignupFormComponent,
     LoginFormComponent,
-    HomePageComponent
+    HomePageComponent,
+    ProfileComponent
   ],
   bootstrap: [
     AppComponent

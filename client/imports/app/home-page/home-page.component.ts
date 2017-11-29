@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Router } from '@angular/router'; 
+
 import { Meteor } from 'meteor/meteor';
 
 @Component({
@@ -8,4 +10,16 @@ import { Meteor } from 'meteor/meteor';
     styleUrls: ['home-page.scss']
   })
   export class HomePageComponent {
+
+    searchValue:string;
+
+    constructor(
+      private router: Router
+    ) { }
+
+    goToUserProfile() {
+      if (this.searchValue != null){
+        this.router.navigate(['/profile', this.searchValue]);
+      }
+    }
   }
