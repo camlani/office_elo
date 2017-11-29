@@ -17,13 +17,13 @@ import { AccountsModule } from 'angular2-meteor-accounts-ui';
 
 import { AuthGuard } from './services/auth-guard/auth-guard.service';
 
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      //Match Add
       {
         path: 'matchAdd',
         component: MatchEntryComponent,
@@ -53,12 +53,19 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
           title: 'Log In'
         } 
       },
-      // Home Page
       {
         path: '',
-        redirectTo: '/matchList',
-        pathMatch: 'full'
+        component: HomePageComponent,
+        data: {
+          title: 'Home'
+        }
       },
+      // Home Page Redirect
+      // {
+      //   path: '',
+      //   redirectTo: '/matchList',
+      //   pathMatch: 'full'
+      // },
       // 404 Page
       {
         path: '**',
@@ -77,7 +84,8 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
     PageNotFoundComponent,
     NavBarComponent,
     SignupFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    HomePageComponent
   ],
   bootstrap: [
     AppComponent
