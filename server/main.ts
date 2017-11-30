@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { MatchStats } from '../imports/collections/matchstats';
+import { Roles } from 'meteor/alanning:roles';
+
 import './modules/configure-services.js';
 
 Meteor.startup(() => {
@@ -22,6 +24,11 @@ Meteor.startup(() => {
         Meteor.call('addMatchStats', objecttoInsert);
 
     }
+
+   //turn whoever into an admin with the highest group
+
+Roles.addUsersToRoles("343Fw3GmDE8caugJj", 'super-admin' )
+
 
 });
 
