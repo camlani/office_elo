@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   })
   export class ProfileComponent {
     username: string;
+    email: string;
+    displayName: string;
     private sub: any;
 
     constructor(private route: ActivatedRoute) {}
@@ -17,6 +19,8 @@ import { ActivatedRoute } from '@angular/router';
     ngOnInit() {
       this.sub = this.route.params.subscribe(params => {
          this.username = params['username'];
+         this.email = "test@email.com";
+         this.displayName = "testDisplayName";
   
          // In a real app: dispatch action to load the details here.
       });
