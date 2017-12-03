@@ -1,52 +1,81 @@
 
 <h1>Match Entry</h1>
 <div *ngIf="!user">Please, log in to add match</div>
-<fieldset *ngIf="user">
-  <legend>Add Match</legend>
-  <label for="tOneOff">
-    Team One Offense
-  </label>
-  <input [(ngModel)]="tOneOff">
-  <br>
-  <label for="tOneDef">
-    Team One Defense
-  </label>
-  <input [(ngModel)]="tOneDef">
-  <br>
-  <label for="tTwoOff">
-    Team Two Offense
-  </label>
-  <input [(ngModel)]="tTwoOff">
-  <br>
-  <label for="tTwoDef">
-    Team Two Defense
-  </label>
-  <input [(ngModel)]="tTwoDef">
-  <br>
-  <label for="tOneRotate">
-    Team One Rotate
-  </label>
-  <input [(ngModel)]="tOneRotate">
-  <br>
-  <label for="tTwoRotate">
-    Team Two Rotate
-  </label>
-  <input [(ngModel)]="tTwoRotate">
-  <br>
-  <label for="tOneWin">
-    Team One Win
-  </label>
-  <input [(ngModel)]="tOneWin">
-  <br>
-  <label for="wScore">
-    Winning Score
-  </label>
-  <input [(ngModel)]="wScore">
-  <br>
-  <label for="lScore">
-    Losing Score
-  </label>
-  <input [(ngModel)]="lScore">
-  <br><br>
-  <button (click)="addMatchStats()" class="btn btn-primary">Add Match</button>
-</fieldset>
+
+<div [hidden]="!submitted" class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Well Done!</strong> Match has been Submitted
+</div>
+
+<form *ngIf="user" class="form-horizontal" (ngSubmit)="onSubmit()" #matchEntryForm="ngForm">
+  <h3>Add Match</h3>
+  <div class="form-group">
+      <label for="tOneOff" class="col-sm-2 control-label">Team One Offense:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="tOneOff" name="tOneOff" required [(ngModel)]="formData.tOneOff">
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="tOneDef" class="col-sm-2 control-label">Team One Defense:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="tOneDef" name="tOneDef" required [(ngModel)]="formData.tOneDef">
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="tTwoOff" class="col-sm-2 control-label">Team Two Offense:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="tTwoOff" name="tTwoOff" required [(ngModel)]="formData.tTwoOff">
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="tTwoDef" class="col-sm-2 control-label">Team Two Defense:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="tTwoDef" name="tTwoDef"  required [(ngModel)]="formData.tTwoDef">
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="tOneRotate" class="col-sm-2 control-label">Team One Rotate:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="tOneRotate" required [(ngModel)]="formData.tOneRotate" name="tOneRotate">
+          <option *ngFor="let res of result" [value]="res">{{res}}</option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="tTwoRotate" class="col-sm-2 control-label">Team Two Rotate:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="tTwoRotate" required [(ngModel)]="formData.tTwoRotate" name="tTwoRotate">
+          <option *ngFor="let res of result" [value]="res">{{res}}</option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="tOneWin" class="col-sm-2 control-label">Winning Team:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="tOneWin" required [(ngModel)]="formData.tOneWin" name="tOneWin">
+          <option *ngFor="let win of winner" [value]="win">{{win}}</option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="wScore" class="col-sm-2 control-label">Winning Team's Score:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="wScore" required [(ngModel)]="formData.wScore" name="wScore">
+          <option *ngFor="let sco of score" [value]="sco">{{sco}}</option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+      <label for="lScore" class="col-sm-2 control-label">Losing Team's Score:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="lScore" required [(ngModel)]="formData.lScore" name="lScore">
+          <option *ngFor="let sco of score" [value]="sco">{{sco}}</option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" [disabled]="!matchEntryForm.form.valid">Submit Match</button>
+      </div>
+    </div>
+</form>
