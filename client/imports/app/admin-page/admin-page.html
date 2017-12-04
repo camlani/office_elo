@@ -1,0 +1,15 @@
+<h1>Admin Page</h1>
+<div *ngIf="!user">Admin Account is needed to view page</div>
+
+
+<div *ngIf="user">
+    <div *ngIf="user.roles && user.roles.includes('super-admin')">
+        
+        
+
+    
+
+
+    </div>
+</div>
+

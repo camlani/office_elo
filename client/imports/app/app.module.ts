@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 import { AuthGuard } from './services/auth-guard/auth-guard.service';
 
@@ -58,6 +59,15 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
           title: 'Profile'
         }
       },
+      {
+        path:'adminpage',
+        component: AdminPageComponent,
+        data: {
+          title: 'Admin Page'
+        }
+
+
+      },
       // Home Page Redirect
       // {
       //   path: '',
@@ -84,7 +94,8 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
     SignupFormComponent,
     LoginFormComponent,
     HomePageComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminPageComponent
   ],
   bootstrap: [
     AppComponent

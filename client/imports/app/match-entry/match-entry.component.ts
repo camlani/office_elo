@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 @Component({
     selector: 'match-entry',
     templateUrl: 'match-entry.html',
-    styles: ['match-entry.scss']
+    styleUrls: ['./match-entry.scss']
   })
 @InjectUser('user')
   export class MatchEntryComponent implements OnInit{
