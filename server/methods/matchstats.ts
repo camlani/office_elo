@@ -19,7 +19,7 @@ Meteor.methods({
     userEntry: matchDetails.userEntry
    });
 
-   var count = MatchStats.find({}).cursor.count()+1;
+   var count = MatchStats.find({}).cursor.count();
    
    Meteor.call('updateTableCount','MatchStats',count);
   },
