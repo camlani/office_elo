@@ -43,6 +43,8 @@ import { MeteorObservable } from 'meteor-rxjs';
 
       });
 
+      Meteor.call('updateUserCount');
+
   }
   loginWithGoogle(){
     console.log("Google Pass");
@@ -57,6 +59,8 @@ import { MeteorObservable } from 'meteor-rxjs';
           //need to redirect here
         }
     });
+
+    Meteor.call('updateUserCount');
 }
 
 }  

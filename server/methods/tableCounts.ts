@@ -23,5 +23,16 @@ Meteor.methods({
     }, {
       upsert: true
     });
+   },
+   updateUserCount() {
+    var count = Meteor.users.find().count();
+    TableCounts.update({
+     tableName: 'users'
+    },{
+      tableName: 'users',
+      entryCount: count
+    }, {
+      upsert: true
+    });
    }
 })

@@ -6,6 +6,8 @@ import './modules/configure-services.js';
 
 Meteor.startup(() => {
 
+    Meteor.call('updateUserCount');
+
     if (MatchStats.find({}).cursor.count() === 0){
   
         var objecttoInsert = {

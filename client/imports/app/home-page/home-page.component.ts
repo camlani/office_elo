@@ -13,8 +13,11 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
     styleUrls: ['home-page.scss']
   })
   export class HomePageComponent {
-    tableCountSubscription: Subscription;
+    countsSubscription: Subscription;
+    matchSubscription: Subscription;
+    userSubscription: Subscription;
     matchCountNum: number;
+    totalPlayersNum: number;
 
     searchValue:string;
 
@@ -23,14 +26,22 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
     ) { }
 
     ngOnInit() {
-      this.tableCountSubscription = MeteorObservable.subscribe('tableCounts').subscribe(() => {
-        TableCounts.find({tableName:'MatchStats'}).subscribe(x => this.matchCountNum = x[0].entryCount)   
+      this.countsSubscription = MeteorObservable.subscribe('tableCounts').subscribe(() => {
+        this.matchSubscription = TableCounts.find({tableName:'MatchStats'}).subscribe(x => this.matchCountNum = x[0].entryCount);
+        this.userSubscription = TableCounts.find({tableName:'users'}).subscribe(x => this.totalPlayersNum = x[0].entryCount);  
       });
     }
 
     ngOnDestroy() {
-      if (this.tableCountSubscription) {
-        this.tableCountSubscription.unsubscribe();
+      if (this.countsSubscription) {
+        this.countsSubscription.unsubscribe();
+      }
+      if (this.matchSubscription) {
+        this.matchSubscription.unsubscribe();
+      }
+
+      if (this.userSubscription) {
+        this.userSubscription.unsubscribe();
       }
     }
 
