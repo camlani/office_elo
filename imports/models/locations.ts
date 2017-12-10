@@ -4,7 +4,7 @@ export interface Table {
     dateAdded?: Date;
     status?: boolean;
     sport?: string;
-
+    userAdded? : string;
 }
 
 
@@ -13,4 +13,5 @@ export interface TableLocation {
     name?: string;
     dateAdded?: Date;
     tables?: Table[];
+    userAdded? : string;
   }

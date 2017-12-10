@@ -15,6 +15,9 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 
+import { LocationEntryComponent } from './location-entry-form/location-entry-form.component'
+import { TableComponent } from './location-entry-form/table-entry-form.component'
+
 import { AuthGuard } from './services/auth-guard/auth-guard.service';
 
 
@@ -95,7 +98,9 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
     LoginFormComponent,
     HomePageComponent,
     ProfileComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    LocationEntryComponent,
+    TableComponent
   ],
   bootstrap: [
     AppComponent
