@@ -5,10 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Meteor } from 'meteor/meteor';
 import { MeteorObservable } from 'meteor-rxjs';
 
-
-// To delete after correctly implemented
-import { MatchStats } from '../../../../imports/collections/matchstats';
-import { MatchStat } from '../../../../imports/models/matchstat';
+import { TableCounts } from '../../../../imports/collections/tableCounts';
 
 @Component({
     selector: 'home-page',
@@ -16,8 +13,7 @@ import { MatchStat } from '../../../../imports/models/matchstat';
     styleUrls: ['home-page.scss']
   })
   export class HomePageComponent {
-    matchstats: Observable<MatchStat[]>;
-    matchListSubscription: Subscription;
+    tableCountSubscription: Subscription;
     matchCountNum: number;
 
     searchValue:string;
@@ -27,17 +23,14 @@ import { MatchStat } from '../../../../imports/models/matchstat';
     ) { }
 
     ngOnInit() {
-      this.matchListSubscription = MeteorObservable.subscribe('matchList').subscribe(() => {
-        this.matchstats = MatchStats.find();   
-
-        MatchStats.find().map(matches => matches.length)
-        .subscribe(count => this.matchCountNum = count)
+      this.tableCountSubscription = MeteorObservable.subscribe('tableCounts').subscribe(() => {
+        TableCounts.find({tableName:'MatchStats'}).subscribe(x => this.matchCountNum = x[0].entryCount)   
       });
     }
 
     ngOnDestroy() {
-      if (this.matchListSubscription) {
-        this.matchListSubscription.unsubscribe();
+      if (this.tableCountSubscription) {
+        this.tableCountSubscription.unsubscribe();
       }
     }
 

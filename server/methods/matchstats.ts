@@ -4,7 +4,6 @@ import { MatchStats } from '../../imports/collections/matchstats';
 
 Meteor.methods({
   addMatchStats(matchDetails) {
-   // Todos.insert({ t });
    MatchStats.insert({
     tOneOff: matchDetails.tOneOff,
     tOneDef: matchDetails.tOneDef,
@@ -18,8 +17,11 @@ Meteor.methods({
     lScore: matchDetails.lScore,
     verif: matchDetails.verif,
     userEntry: matchDetails.userEntry
-
    });
+
+   var count = MatchStats.find({}).cursor.count()+1;
+   
+   Meteor.call('updateTableCount','MatchStats',count);
   },
   removeMatchStats(_id: string) {
     MatchStats.remove({
