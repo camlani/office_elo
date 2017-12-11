@@ -1,12 +1,17 @@
 <h1>CS RTP</h1>
 <div class="input-group stylish-input-group col-xs-12 col-md-12">
-    <input [(ngModel)]="searchValue" name="searchValue" type="text" (keyup.enter)="goToUserProfile()"
+    <input [(ngModel)]="searchValue" name="searchValue" type="text" (keyup)="search()" (keyup.enter)="navigateToProfileWithSearchValue()"
         class="form-control"  placeholder="Search for a Player..." >
     <span class="input-group-addon">
-        <button (click)="goToUserProfile()">
+        <button (click)="navigateToProfileWithSearchValue()">
             <span class="glyphicon glyphicon-search"></span>
         </button>  
     </span>
+</div>
+<div class="list-group" *ngIf="users?.length > 0"> 
+    <a class="list-group-item" *ngFor="let user of users" (click)="navigateToProfile(user.username)">
+        {{ user.username }}
+    </a>
 </div>
 <div class="row">
     <div class="col-md-4 col-md-push-8 col-xs-12"> 

@@ -20,6 +20,8 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
     totalPlayersNum: number;
 
     searchValue:string;
+    searchSubscription: Subscription;
+    users: Meteor.User[];
 
     constructor(
       private router: Router
@@ -39,15 +41,34 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
       if (this.matchSubscription) {
         this.matchSubscription.unsubscribe();
       }
-
       if (this.userSubscription) {
         this.userSubscription.unsubscribe();
       }
     }
 
-    goToUserProfile() {
-      if (this.searchValue != null){
-        this.router.navigate(['/profile', this.searchValue]);
+    navigateToProfile(username) {
+      if (this.searchValue && this.searchValue.trim().length){
+        this.router.navigate(['/profile', username]);
+      }
+    }
+    navigateToProfileWithSearchValue() {
+      if (this.users){
+        this.router.navigate(['/profile', this.users[0].username]);
+      }
+    }
+    
+    search() {
+      if (this.searchValue && this.searchValue.length > 2 && this.searchValue.trim().length) {
+        Meteor.subscribe("users");
+        this.users = Meteor.users.find({
+          "$or": [{
+              username: {$regex : this.searchValue}
+          }, {
+              displayname: {$regex : this.searchValue}
+          }]}
+        ).fetch();
+      } else {
+        this.users = null;
       }
     }
   }
