@@ -6,6 +6,12 @@ import { InjectUser } from 'angular2-meteor-accounts-ui';
 import { Meteor } from 'meteor/meteor';
 import { MeteorObservable } from 'meteor-rxjs';
 
+import { LocationService } from '../location-selection/location-selection.service';
+
+import { TableLocations } from '../../../../imports/collections/locations';
+import { Table, TableLocation } from '../../../../imports/models/locations';
+
+
 @Component({
     selector: 'nav-bar',
     templateUrl: 'nav-bar.html',
@@ -14,12 +20,35 @@ import { MeteorObservable } from 'meteor-rxjs';
   @InjectUser('user')
   export class NavBarComponent implements OnInit {
     user: Meteor.User;
-    ngOnInit() {
-      console.log(this.user)
-    }
+    locationTables: Observable<TableLocation[]>;
+    locationTablesSubscription: Subscription;
+    locationNameSelected : String
 
+    constructor(private locationService: LocationService){
+
+    }
+    ngOnInit() {
+      this.locationTablesSubscription = MeteorObservable.subscribe('tableLocations').subscribe(() => {
+        this.locationTables = TableLocations.find();
+        //need to find the users prefered location too.
+      });
+    }
+    ngOnDestroy(){
+      if (this.locationTablesSubscription) {
+        this.locationTablesSubscription.unsubscribe();
+      }
+    }
     logout() {
       Meteor.logout();
+    }
+    selectLocation(id, name){
+      //console.log("location Selected" + " " + id + " " + name)
+      this.locationService.setLocationId(id);
+      this.locationService.setLocationName(name);
+      this.locationNameSelected = this.locationService.getLocationName();
+      //console.log(this.locationNameSelected);
+
+
     }
     // Do not need these anymore since going to redirect
     // login(){

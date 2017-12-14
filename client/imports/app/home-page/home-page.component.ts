@@ -5,6 +5,9 @@ import { Observable, Subscription } from 'rxjs';
 import { Meteor } from 'meteor/meteor';
 import { MeteorObservable } from 'meteor-rxjs';
 
+import { LocationService } from '../location-selection/location-selection.service';
+
+
 import { TableCounts } from '../../../../imports/collections/tableCounts';
 
 @Component({
@@ -24,7 +27,9 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
     users: Meteor.User[];
 
     constructor(
-      private router: Router
+      private router: Router,
+      private locationService: LocationService
+      
     ) { }
 
     ngOnInit() {

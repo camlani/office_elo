@@ -1,4 +1,6 @@
-<h1>CS RTP</h1>
+
+<h1 *ngIf="locationService.getLocationName()">{{locationService.getLocationName()}} Stats</h1>
+<h1 *ngIf="!locationService.getLocationName()">Overall Stats</h1>
 <div class="input-group stylish-input-group col-xs-12 col-md-12">
     <input [(ngModel)]="searchValue" name="searchValue" type="text" (keyup)="search()" (keyup.enter)="navigateToProfileWithSearchValue()"
         class="form-control"  placeholder="Search for a Player..." >
@@ -13,6 +15,9 @@
         {{ user.username }}
     </a>
 </div>
+<table-status>
+    
+</table-status>
 <div class="row">
     <div class="col-md-4 col-md-push-8 col-xs-12"> 
             <h1>Table Avaliability</h1>

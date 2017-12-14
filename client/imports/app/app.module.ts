@@ -14,6 +14,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { TableStatusComponent } from './table-status/table-status-component';
+
+import { LocationService } from './location-selection/location-selection.service';
 
 import { LocationEntryComponent } from './location-entry-form/location-entry-form.component'
 import { TableComponent } from './location-entry-form/table-entry-form.component'
@@ -100,13 +103,15 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
     ProfileComponent,
     AdminPageComponent,
     LocationEntryComponent,
-    TableComponent
+    TableComponent,
+    TableStatusComponent
   ],
   bootstrap: [
     AppComponent
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    LocationService
   ]
 })
 
