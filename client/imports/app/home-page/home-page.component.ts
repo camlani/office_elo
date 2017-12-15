@@ -28,8 +28,7 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
 
     constructor(
       private router: Router,
-      private locationService: LocationService
-      
+      private locationService: LocationService    
     ) { }
 
     ngOnInit() {
@@ -67,9 +66,9 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
         Meteor.subscribe("users");
         this.users = Meteor.users.find({
           "$or": [{
-              username: {$regex : this.searchValue}
+              username: {$regex : this.searchValue, $options: "i"}
           }, {
-              displayname: {$regex : this.searchValue}
+              displayname: {$regex : this.searchValue, $options: "i"}
           }]}
         ).fetch();
       } else {

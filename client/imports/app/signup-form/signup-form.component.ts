@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { InjectUser } from 'angular2-meteor-accounts-ui';
+import { Router } from '@angular/router'; 
 
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
@@ -18,6 +19,11 @@ import { MeteorObservable } from 'meteor-rxjs';
     userName: string;
     email: string;
     password: string;
+
+    constructor(
+      private router: Router   
+    ) {}
+
     ngOnInit() {
       
     }
@@ -39,6 +45,7 @@ import { MeteorObservable } from 'meteor-rxjs';
         } else {
           //console.log("Logged in")
           //need to redirect here
+          this.router.navigate(['']);
         }
 
       });
@@ -57,6 +64,7 @@ import { MeteorObservable } from 'meteor-rxjs';
         } else {
           //console.log("Logged in")
           //need to redirect here
+          this.router.navigate(['']);
         }
     });
 

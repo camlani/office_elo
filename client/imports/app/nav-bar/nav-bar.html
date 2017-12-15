@@ -29,7 +29,7 @@
                   <li (click)="selectLocation(location._id , location.name)" *ngFor="let location of locationTables | async" [value]="location._id"><a>{{location.name}}</a> </li>
                 </ul>
               </li>
-            <li><a *ngIf="user">{{ user.username }}</a></li>
+            <li><a *ngIf="user" routerLink="profile/{{user.username}}">{{ user.username }}</a></li>
             <li><a (click)="logout()" >Log Out</a></li>
 
             

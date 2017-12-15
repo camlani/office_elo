@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { InjectUser } from 'angular2-meteor-accounts-ui';
+import { Router } from '@angular/router'; 
 
 
 import { Meteor } from 'meteor/meteor';
@@ -18,6 +19,11 @@ declare var $: any;
     user: Meteor.User;
     email: string;
     password: string;
+
+    constructor(
+      private router: Router   
+    ) {}
+
     ngOnInit() {
         //need to move this probably to on change as well
         //so when you click away from it, it will still be able to be reacted with
@@ -32,8 +38,8 @@ declare var $: any;
               console.log("Not logged in")
             } else {
               console.log("Logged in")
-              //need to redirect here
-            }
+              this.router.navigate(['']);
+              }
         });
     }
     loginWithGoogle(){
@@ -46,7 +52,7 @@ declare var $: any;
               console.log("Not logged in")
             } else {
               console.log("Logged in")
-              //need to redirect here
+              this.router.navigate(['']);
             }
         });
     }
