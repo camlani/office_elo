@@ -12,25 +12,53 @@
   <div class="form-group">
       <label for="tOneOff" class="col-sm-2 control-label">Team One Offense:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="tOneOff" name="tOneOff" required [(ngModel)]="formData.tOneOff">
+        <input type="text" class="form-control" id="tOneOff" name="tOneOff" required [(ngModel)]="formData.tOneOff" (keyup)="search(formData.tOneOff,'tOneOff')"
+        (keyup.enter)="setSearchValue('tOneOff')">
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10 list-group" *ngIf="tOneOffenders?.length > 0"> 
+          <a class="list-group-item" *ngFor="let user of tOneOffenders" (click)="formData.tOneOff=user.username;tOneOffenders=null">
+              {{ user.username }}
+          </a>
       </div>
   </div>
   <div class="form-group">
       <label for="tOneDef" class="col-sm-2 control-label">Team One Defense:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="tOneDef" name="tOneDef" required [(ngModel)]="formData.tOneDef">
+        <input type="text" class="form-control" id="tOneDef" name="tOneDef" required [(ngModel)]="formData.tOneDef" (keyup)="search(formData.tOneDef,'tOneDef')"
+        (keyup.enter)="setSearchValue('tOneDef')">
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10 list-group" *ngIf="tOneDefenders?.length > 0"> 
+          <a class="list-group-item" *ngFor="let user of tOneDefenders" (click)="formData.tOneDef=user.username;tOneDefenders=null">
+              {{ user.username }}
+          </a>
       </div>
   </div>
   <div class="form-group">
       <label for="tTwoOff" class="col-sm-2 control-label">Team Two Offense:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="tTwoOff" name="tTwoOff" required [(ngModel)]="formData.tTwoOff">
+        <input type="text" class="form-control" id="tTwoOff" name="tTwoOff" required [(ngModel)]="formData.tTwoOff" (keyup)="search(formData.tTwoOff,'tTwoOff')"
+        (keyup.enter)="setSearchValue('tTwoOff')">
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10 list-group" *ngIf="tTwoOffenders?.length > 0"> 
+          <a class="list-group-item" *ngFor="let user of tTwoOffenders" (click)="formData.tTwoOff=user.username;tTwoOffenders=null">
+              {{ user.username }}
+          </a>
       </div>
   </div>
   <div class="form-group">
       <label for="tTwoDef" class="col-sm-2 control-label">Team Two Defense:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="tTwoDef" name="tTwoDef"  required [(ngModel)]="formData.tTwoDef">
+        <input type="text" class="form-control" id="tTwoDef" name="tTwoDef"  required [(ngModel)]="formData.tTwoDef" (keyup)="search(formData.tTwoDef,'tTwoDef')"
+        (keyup.enter)="setSearchValue('tTwoDef')">
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10 list-group" *ngIf="tTwoDefenders?.length > 0"> 
+          <a class="list-group-item" *ngFor="let user of tTwoDefenders" (click)="formData.tTwoDef=user.username;tTwoDefenders=null">
+              {{ user.username }}
+          </a>
       </div>
   </div>
   <div class="form-group">

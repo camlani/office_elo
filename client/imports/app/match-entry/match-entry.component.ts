@@ -23,13 +23,18 @@ import { Meteor } from 'meteor/meteor';
     lScore: number;
     user: Meteor.User;
 
+    tOneOffenders: Meteor.User[];
+    tOneDefenders: Meteor.User[];
+    tTwoOffenders: Meteor.User[];
+    tTwoDefenders: Meteor.User[];
+    
     submitted = false;
 
     //array for initialization
     result = ['No', 'Yes'];
     winner = ['Team 1', 'Team 2'];
 
-    score =[0, 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10];
+    score =[10,9,8,7,6,5,4,3,2,1,0];
 
     formData = new matchEntryForm("", "", "", "",this.result[0], this.result[0],"",null,null,this.user);
 
@@ -63,7 +68,6 @@ import { Meteor } from 'meteor/meteor';
             lScore: this.formData.lScore,
             verif: false,
             userEntry: Meteor.userId()
-
         } 
         
         //console.log(objecttoInsert);
@@ -71,6 +75,107 @@ import { Meteor } from 'meteor/meteor';
         this.formData = new matchEntryForm("", "", "", "",this.result[0], this.result[0],"",null,null,this.user);
 
     } 
+
+    search(searchValue:string, formInputBox:string) {
+        if (searchValue && searchValue.length > 1 && searchValue.trim().length) {
+          Meteor.subscribe("users");
+
+          switch(formInputBox) { 
+            case "tOneOff": { 
+                this.tOneOffenders = Meteor.users.find({
+                    "$or": [{
+                        username: {$regex : searchValue, $options: "i"}
+                    }, {
+                        displayname: {$regex : searchValue, $options: "i"}
+                    }]}
+                  ).fetch();
+               break; 
+            } 
+            case "tOneDef": { 
+                this.tOneDefenders = Meteor.users.find({
+                    "$or": [{
+                        username: {$regex : searchValue, $options: "i"}
+                    }, {
+                        displayname: {$regex : searchValue, $options: "i"}
+                    }]}
+                  ).fetch();
+               break; 
+            } 
+            case "tTwoOff": { 
+                this.tTwoOffenders = Meteor.users.find({
+                    "$or": [{
+                        username: {$regex : searchValue, $options: "i"}
+                    }, {
+                        displayname: {$regex : searchValue, $options: "i"}
+                    }]}
+                  ).fetch();
+                break; 
+             } 
+             case "tTwoDef": { 
+                this.tTwoDefenders = Meteor.users.find({
+                    "$or": [{
+                        username: {$regex : searchValue, $options: "i"}
+                    }, {
+                        displayname: {$regex : searchValue, $options: "i"}
+                    }]}
+                  ).fetch(); 
+                break; 
+             } 
+         } 
+        } else {
+            switch(formInputBox) { 
+                case "tOneOff": { 
+                    this.tOneOffenders = null;
+                   break; 
+                } 
+                case "tOneDef": { 
+                    this.tOneDefenders = null;
+                   break; 
+                } 
+                case "tTwoOff": { 
+                    this.tTwoOffenders = null;
+                    break; 
+                 } 
+                 case "tTwoDef": { 
+                    this.tTwoDefenders = null;
+                    break; 
+                 } 
+            }
+        }
+      }
+
+    setSearchValue(formInputBox:string){
+        switch(formInputBox) { 
+            case "tOneOff": { 
+                if (this.tOneOffenders.length > 0) {
+                    this.formData.tOneOff = this.tOneOffenders[0].username;
+                }
+                this.tOneOffenders = null;
+               break; 
+            } 
+            case "tOneDef": { 
+                if (this.tOneDefenders.length > 0) {
+                    this.formData.tOneDef = this.tOneDefenders[0].username;
+                }
+                this.tOneDefenders = null;
+               break; 
+            } 
+            case "tTwoOff": { 
+                if (this.tTwoOffenders.length > 0) {
+                    this.formData.tTwoOff = this.tTwoOffenders[0].username;
+                }
+                this.tTwoOffenders = null;
+                break; 
+             } 
+             case "tTwoDef": { 
+                if (this.tTwoDefenders.length > 0) {
+                    this.formData.tTwoDef = this.tTwoDefenders[0].username;
+                }
+                this.tTwoDefenders = null;
+                break; 
+             } 
+        }
+    }
     testaddMatchStats(){
 
 
