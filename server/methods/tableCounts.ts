@@ -38,8 +38,6 @@ Meteor.methods({
    },
    updateMatchCount() {
     var count = MatchStats.find({}).cursor.count();
-    console.log(count);
-    console.log('updated');
     TableCounts.update({
      tableName: 'MatchStats'
     },{

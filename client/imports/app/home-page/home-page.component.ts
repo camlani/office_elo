@@ -56,13 +56,13 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
       }
     }
     navigateToProfileWithSearchValue() {
-      if (this.users){
+      if (this.users && this.users.length > 0){
         this.router.navigate(['/profile', this.users[0].username]);
       }
     }
     
     search() {
-      if (this.searchValue && this.searchValue.length > 2 && this.searchValue.trim().length) {
+      if (this.searchValue && this.searchValue.length > 1 && this.searchValue.trim().length) {
         Meteor.subscribe("users");
         this.users = Meteor.users.find({
           "$or": [{

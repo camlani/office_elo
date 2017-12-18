@@ -48,6 +48,15 @@ import { Meteor } from 'meteor/meteor';
             alert('Please log in to add a match');
             return;
         }
+
+        //Temporary form validation
+        if(this.formData.wScore < this.formData.lScore ||
+            this.wScore < this.lScore ||
+            this.formData.wScore < this.lScore ||
+            this.wScore < this.formData.lScore){
+            alert('Winning score must be higher than losing score. Please try again.');
+            return;
+        }
         this.submitted = true;
         let formWin = false;
         //Turn win into a boolean
