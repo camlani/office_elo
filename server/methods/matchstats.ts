@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 import { MatchStats } from '../../imports/collections/matchstats';
+import { console } from 'meteor/tools';
 
 Meteor.methods({
   addMatchStats(matchDetails) {
@@ -21,7 +22,8 @@ Meteor.methods({
 
    var count = MatchStats.find({}).cursor.count();
    
-   Meteor.call('updateTableCount','MatchStats',count);
+   Meteor.call('updateMatchCount');
+
   },
   removeMatchStats(_id: string) {
     MatchStats.remove({

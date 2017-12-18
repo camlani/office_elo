@@ -47,14 +47,9 @@ import { Table, TableLocation } from '../../../../imports/models/locations';
       this.locationService.setLocationName(name);
       this.locationNameSelected = this.locationService.getLocationName();
       //console.log(this.locationNameSelected);
-
-
     }
-    // Do not need these anymore since going to redirect
-    // login(){
-    //   console.log("Log in")
-    // }
-    // signup(){
-    //   console.log("Sign Up")
-    // }
+
+    closeNav () {
+      $(".navbar-toggle").click();
+    }
 }  

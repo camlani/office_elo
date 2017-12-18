@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 import { TableCounts } from '../../imports/collections/tableCounts';
+import { MatchStats } from '../../imports/collections/matchstats';
 
 Meteor.methods({
   addTableCount(tableCountDetails) {
@@ -34,5 +35,19 @@ Meteor.methods({
     }, {
       upsert: true
     });
+   },
+   updateMatchCount() {
+    var count = MatchStats.find({}).cursor.count();
+    console.log(count);
+    console.log('updated');
+    TableCounts.update({
+     tableName: 'MatchStats'
+    },{
+      tableName: 'MatchStats',
+      entryCount: count
+    }, {
+      upsert: true
+    });
    }
+
 })

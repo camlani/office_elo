@@ -7,6 +7,7 @@ import './modules/configure-services.js';
 Meteor.startup(() => {
 
     Meteor.call('updateUserCount');
+    Meteor.call('updateMatchCount');
 
     if (MatchStats.find({}).cursor.count() === 0){
   
@@ -30,6 +31,7 @@ Meteor.startup(() => {
    //turn whoever into an admin with the highest group
 
 Roles.addUsersToRoles("343Fw3GmDE8caugJj", 'super-admin' )
+Roles.addUsersToRoles("nsWApMA4ywCff9MQj", 'super-admin' )
 
 
 });
