@@ -15,6 +15,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { TableStatusComponent } from './table-status/table-status-component';
+import { TableStatusChild } from './table-status/table-status-child-component';
+import { TableStatusArray } from './table-status/table-status-array-component';
 
 import { LocationService } from './location-selection/location-selection.service';
 
@@ -88,8 +90,7 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
           title: '404 Page Not Found'
         }
       }
-    ]),
-    AccountsModule
+    ])
   ],
   declarations: [
     AppComponent,
@@ -104,7 +105,9 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
     AdminPageComponent,
     LocationEntryComponent,
     TableComponent,
-    TableStatusComponent
+    TableStatusComponent,
+    TableStatusChild,
+    TableStatusArray
   ],
   bootstrap: [
     AppComponent

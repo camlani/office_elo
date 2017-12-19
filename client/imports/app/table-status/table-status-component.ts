@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription  } from 'rxjs';
 import { InjectUser } from 'angular2-meteor-accounts-ui';
 
 
 import { Meteor } from 'meteor/meteor';
-import { MeteorObservable } from 'meteor-rxjs';
+import { MeteorObservable, ObservableCursor } from 'meteor-rxjs';
 
 import { LocationService } from '../location-selection/location-selection.service';
 
@@ -20,23 +20,32 @@ import { Table, TableLocation } from '../../../../imports/models/locations';
 export class TableStatusComponent implements OnInit {
     user: Meteor.User;
     locationTables: Observable<TableLocation[]>;
+    locationTable: ObservableCursor<TableLocation>;
     locationTablesSubscription: Subscription;
-
+    
+    locationId: string;
+    
     constructor(private locationService: LocationService){
         
     }
-    //need an observable or some sort of event emitter, to then rerun the 
-    //what needs to happen is that child stuff once again and pass in the values from the ngfor
-    ngOnInit(){
-        this.locationTablesSubscription = MeteorObservable.subscribe('tableLocations').subscribe(() => {
-            this.locationTables = TableLocations.find({_id: this.locationService.getLocationId()});
-            console.log(this.locationService.getLocationId())
-        });
+        ngOnInit(){
+        this.locationService.currentLocation_id.subscribe(locationId => this.locationTablesSubscription = MeteorObservable.subscribe('tableLocations').subscribe(() => {
+            //this.locationTables = TableLocations.find({_id: this.locationService.getLocationId()});
+            //this value is not loaded quick enough
+            this.locationTables = TableLocations.find({"_id": locationId});
+            //this.locationTable = TableLocations.findOne({"_id": locationId});
+        }));
+        console.log(this.locationTable);
+        
     }
     ngOnDestroy(){
         if (this.locationTablesSubscription) {
           this.locationTablesSubscription.unsubscribe();
         }
+    }
+    //event from event emitter
+    toggleStatusEvent(tableToEdit){
+
     }
     
 }

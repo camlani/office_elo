@@ -1,9 +1,24 @@
 <div>
     <div *ngIf="locationService.getLocationName()">
         <h3 *ngIf="locationService.getLocationName()">{{locationService.getLocationName()}} Status</h3>
-        
-        <h4 *ngFor="let location of locationTables | async">{{location.name}}</h4>
-        <h4 *ngFor="let table of location.tables | async">{{table.name}} {{table.status}}</h4>
+        <div *ngIf="locationTables">
+                <table *ngFor="let location of locationTables | async" class="table table-responsive table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Table Status</th>
+                                <th>Toggle Status</th> 
+                            </tr>
+                         </thead>
+                         <tbody>
+                                <tr>
+                                    <table-status-array
+                                        [tables]="location.tables">
+                                    </table-status-array>
+                                </tr>
+
+                         </tbody>   
+                 </table>
+        </div>       
     </div>
         
 </div>

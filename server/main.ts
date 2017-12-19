@@ -9,29 +9,28 @@ Meteor.startup(() => {
     Meteor.call('updateUserCount');
     Meteor.call('updateMatchCount');
 
-    if (MatchStats.find({}).cursor.count() === 0){
+    // if (MatchStats.find({}).cursor.count() === 0){
   
-        var objecttoInsert = {
-            tOneOff: "Cameron",
-            tOneDef: "Lofton",
-            tTwoOff: "Shawn",
-            tTwoDef: "Elaine",
-            tOneRotate: false,
-            tTwoRotate : false,
-            mTime: new Date(),
-            tOneWin: false,
-            wScore: 10,
-            lScore: 5,
-            verif: false
-        }
-        Meteor.call('addMatchStats', objecttoInsert);
+    //     var objecttoInsert = {
+    //         tOneOff: "Cameron",
+    //         tOneDef: "Lofton",
+    //         tTwoOff: "Shawn",
+    //         tTwoDef: "Elaine",
+    //         tOneRotate: false,
+    //         tTwoRotate : false,
+    //         mTime: new Date(),
+    //         tOneWin: false,
+    //         wScore: 10,
+    //         lScore: 5,
+    //         verif: false
+    //     }
+    //     Meteor.call('addMatchStats', objecttoInsert);
 
-    }
+    // }
 
    //turn whoever into an admin with the highest group
 
-Roles.addUsersToRoles("343Fw3GmDE8caugJj", 'super-admin' )
-Roles.addUsersToRoles("nsWApMA4ywCff9MQj", 'super-admin' )
+Roles.addUsersToRoles("6mbJ6CMEmptFtuy2G", 'super-admin' )
 
 
 });
