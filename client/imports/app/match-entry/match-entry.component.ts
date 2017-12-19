@@ -49,11 +49,10 @@ import { Meteor } from 'meteor/meteor';
             return;
         }
 
+        console.log(parseInt(this.formData.lScore.toString()) + " " +  parseInt(this.formData.lScore.toString()))
+            
         //Temporary form validation
-        if(this.formData.wScore < this.formData.lScore ||
-            this.wScore < this.lScore ||
-            this.formData.wScore < this.lScore ||
-            this.wScore < this.formData.lScore){
+        if(parseInt(this.formData.wScore.toString()) < parseInt(this.formData.lScore.toString())){
             alert('Winning score must be higher than losing score. Please try again.');
             return;
         }

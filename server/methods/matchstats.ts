@@ -14,12 +14,13 @@ Meteor.methods({
     tTwoRotate : matchDetails.tTwoRotate,
     mTime: matchDetails.mTime,
     tOneWin: matchDetails.tOneWin,
-    wScore: matchDetails.wScore,
-    lScore: matchDetails.lScore,
+    wScore: Number(matchDetails.wScore),
+    lScore: Number(matchDetails.lScore),
     verif: matchDetails.verif,
     userEntry: matchDetails.userEntry
    });
-
+//wScore: Number(matchDetails.wScore),
+//lScore: Number(matchDetails.lScore),
    var count = MatchStats.find({}).cursor.count();
    
    Meteor.call('updateMatchCount');
