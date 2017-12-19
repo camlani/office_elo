@@ -1,21 +1,23 @@
 <h1>Recent Matches</h1>
-<table class="table table-striped table-hover">
-    <thead>
-    <tr>
-        <th>Team 1 (Offense)</th>
-        <th>Team 1 (Defense)</th>
-        <th>Team 2 (Offense)</th>
-        <th>Team 2 (Defense)</th>
-        <th>Winner</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let match of matchstats | async">
-        <td>{{match.tOneOff}}</td>
-        <td>{{match.tOneDef}}</td>
-        <td>{{match.tTwoOff}}</td>
-        <td>{{match.tTwoDef}}</td>
-        <td>{{match.tOneWin ? "Team 1":"Team 2"}}</td>
-    </tr>
-    </tbody>
-</table> 
+    <div class="col-xs-12 col-sm-12" style="overflow-x:auto">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Team 1 (Offense)</th>
+            <th>Team 1 (Defense)</th>
+            <th>Team 2 (Offense)</th>
+            <th>Team 2 (Defense)</th>
+            <th>Winner</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let match of matchstats | async">
+            <td>{{match.tOneOff}}</td>
+            <td>{{match.tOneDef}}</td>
+            <td>{{match.tTwoOff}}</td>
+            <td>{{match.tTwoDef}}</td>
+            <td>{{match.tOneWin ? "Team 1":"Team 2"}}</td>
+        </tr>
+        </tbody>
+    </table> 
+</div>
