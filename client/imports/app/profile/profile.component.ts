@@ -19,10 +19,11 @@ import { MeteorObservable } from 'meteor-rxjs';
     profile: any;
     wins = 0;
     losses = 0;
+    winLossRatio = 0;
     totalGamesPlayed = 0;
     statsLoaded = false;
 
-    matchstats: Observable<MatchStat[]>;
+    matchstats: MatchStat[];
     matchListSubscription: Subscription;
 
     private sub: any;
@@ -34,12 +35,13 @@ import { MeteorObservable } from 'meteor-rxjs';
         this.username = params['username'];
          
         this.matchListSubscription = MeteorObservable.subscribe('profile', this.username).subscribe(() => {
-          this.matchstats = MatchStats.find();
-          this.matchstats.subscribe((matches) => {
-            this.statsLoaded = true;
-          });          
-          
-          console.log(this.matchstats.last);  
+          this.matchstats = MatchStats.find().fetch();
+          this.wins = this.numberOfWins(this.matchstats);
+          this.losses = this.numberOfLosses(this.matchstats);
+          this.winLossRatio = this.wins / this.losses;
+          this.totalGamesPlayed = this.matchstats.length;
+
+          this.statsLoaded = true;
         });
 
 
@@ -89,10 +91,6 @@ import { MeteorObservable } from 'meteor-rxjs';
       });
       this.losses = losses;
       return losses;
-    }
-
-    calculateRatio(){
-      return this.wins / this.losses;
     }
 
     ngOnDestroy() {
