@@ -1,6 +1,6 @@
 <div class="container-fluid">
 <h1 class="text-center">{{username}}</h1>
-    <div class="col-md-4 col-xs-12"> 
+    <div class="col-md-4 col-sm-12"> 
         <div class="row">
             <h2>User Info</h2> 
             Username - {{username}} <br>
@@ -17,16 +17,18 @@
                 Rank 42<br>
             </div> 
         </div>
-        <div class="row">
+        <div *ngIf="statsLoaded" class="row">
         <h2>Stats</h2>
-        Wins / Loses - Win Ratio<br>
+        Wins - {{numberOfWins(matchstats)}}<br>
+        Losses -  {{numberOfLosses(matchstats)}}<br>
+        Win / Loss Ratio - {{calculateRatio()}}<br>
         Buddy -<br>
         Nemisis -<br>
         Most Frequent Partner - <br>
         Total Games Played - 69
         </div> 
     </div>
-    <div class="col-md-8 col-xs-12"> 
+    <div class="col-md-8 col-sm-12"> 
         <div class="row">   
             <h2>Performace (Last 30 Days)</h2>
             <div class="well col-md-6 text-center">
@@ -38,6 +40,28 @@
         </div>   
         <div class="row"> 
             <h2>Match History</h2> 
+            <div style="overflow-x:auto">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Team 1 (Offense)</th>
+                        <th>Team 1 (Defense)</th>
+                        <th>Team 2 (Offense)</th>
+                        <th>Team 2 (Defense)</th>
+                        <th>Winner</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let match of matchstats | async" [ngClass]="(didUserWin(match))?'win':'loss'">
+                        <td>{{match.tOneOff}}</td>
+                        <td>{{match.tOneDef}}</td>
+                        <td>{{match.tTwoOff}}</td>
+                        <td>{{match.tTwoDef}}</td>
+                        <td>{{match.tOneWin ? "Team 1":"Team 2"}}</td>
+                    </tr>
+                    </tbody>
+                </table> 
+            </div>
         </div>    
     </div>
 </div>
