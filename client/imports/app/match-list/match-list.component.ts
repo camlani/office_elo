@@ -17,7 +17,7 @@ import { MatchStat } from '../../../../imports/models/matchstat';
     matchListSubscription: Subscription;
     ngOnInit() {
       this.matchListSubscription = MeteorObservable.subscribe('matchList').subscribe(() => {
-        this.matchstats = MatchStats.find();
+        this.matchstats = MatchStats.find({},{sort:{mTime:-1}});
       });
     }
     ngOnDestroy() {

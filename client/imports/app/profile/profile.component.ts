@@ -35,7 +35,7 @@ import { MeteorObservable } from 'meteor-rxjs';
         this.username = params['username'];
          
         this.matchListSubscription = MeteorObservable.subscribe('profile', this.username).subscribe(() => {
-          this.matchstats = MatchStats.find().fetch();
+          this.matchstats = MatchStats.find({},{sort:{mTime:-1}}).fetch();
           this.wins = this.numberOfWins(this.matchstats);
           this.losses = this.numberOfLosses(this.matchstats);
           this.winLossRatio = this.wins / this.losses;
