@@ -20,7 +20,14 @@ import { MeteorObservable } from 'meteor-rxjs';
     wins = 0;
     losses = 0;
     winLossRatio = 0;
+    winPercentage = 0;
     totalGamesPlayed = 0;
+    offenseGames = 0;
+    defenseGames = 0;
+    offenseWins = 0;
+    defenseWins = 0;
+    offensiveWinPercentage = 0;
+    defensiveWinPercentage = 0;
     statsLoaded = false;
 
     matchstats: MatchStat[];
@@ -35,10 +42,17 @@ import { MeteorObservable } from 'meteor-rxjs';
         this.username = params['username'];
          
         this.matchListSubscription = MeteorObservable.subscribe('profile', this.username).subscribe(() => {
+          //console.log(this.username);
           this.matchstats = MatchStats.find({},{sort:{mTime:-1}}).fetch();
+          //this.matchstats = MatchStats.find({"tTwoDef":"Sushil"}).fetch();
+          //console.log(this.matchstats);
           this.wins = this.numberOfWins(this.matchstats);
           this.losses = this.numberOfLosses(this.matchstats);
-          this.winLossRatio = this.wins / this.losses;
+          this.winLossRatio = +(this.wins / this.losses).toFixed(2);
+          this.offenseWins = this.numberOfWinsOffense(this.matchstats);
+          this.winPercentage = +((this.wins / (this.losses + this.wins))*100).toFixed(2);
+          this.offensiveWinPercentage = +((this.offenseWins / (this.offenseGames))*100).toFixed(2);
+          this.defensiveWinPercentage = +((this.defenseWins / (this.defenseGames))*100).toFixed(2);
           this.totalGamesPlayed = this.matchstats.length;
 
           this.statsLoaded = true;
@@ -71,6 +85,14 @@ import { MeteorObservable } from 'meteor-rxjs';
       }
     }
 
+    didUserPlayOffense(match:MatchStat){
+      if ((match.tOneOff===this.username || match.tTwoOff===this.username)){
+        return true;
+      } else {
+        return false
+      }
+    }
+
     numberOfWins(matches:MatchStat[]) {
       var wins = 0;
       matches.forEach((match)=>{
@@ -92,6 +114,34 @@ import { MeteorObservable } from 'meteor-rxjs';
       this.losses = losses;
       return losses;
     }
+
+    
+
+    numberOfWinsOffense(matches:MatchStat[]) {
+      var wins = 0;
+      var timesPlayedOffense = 0;
+      var defWins = 0;
+      var timesPlayedDefense = 0;
+      matches.forEach((match)=>{
+        if (this.didUserPlayOffense(match)){
+          if(this.didUserWin(match)){
+            wins++;
+          }
+          timesPlayedOffense++;
+        } else {
+          if(this.didUserWin(match)){
+            defWins++;
+          }
+          timesPlayedDefense++;
+        }
+      });
+      this.offenseWins = wins;
+      this.offenseGames = timesPlayedOffense;
+      this.defenseWins = defWins;
+      this.defenseGames = timesPlayedDefense;
+      return wins;
+    }
+
 
     ngOnDestroy() {
       if (this.matchListSubscription) {

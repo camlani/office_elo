@@ -18,19 +18,78 @@
             </div> 
         </div>
         <div class="row">
-        <h2>Stats</h2>
-        Wins - {{wins}}<br>
-        Losses -  {{losses}}<br>
-        Win / Loss Ratio - {{winLossRatio}}<br>
-        Total Games Played - {{totalGamesPlayed}}<br>
-        Buddy -<br>
-        Nemisis -<br>
-        Most Frequent Partner -
-        </div> 
+        <h2>Quick Stats</h2>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Stat</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Wins</td>
+                    <td>{{wins}}</td>
+                </tr>
+                <tr>
+                    <td>Losses</td>
+                    <td>{{losses}}</td>
+                </tr>
+                <tr>
+                    <td>Win/Loss Ratio</td>
+                    <td>{{winLossRatio}}</td>
+                </tr>
+                <tr>
+                    <td>Win Percentage</td>
+                    <td>{{winPercentage}}%</td>
+                </tr>
+                <tr>
+                    <td>Total Games Played</td>
+                    <td>{{totalGamesPlayed}}</td>
+                </tr>
+                <tr>
+                    <td>Offense Wins</td>
+                    <td>{{offenseWins}}</td>
+                </tr>
+                <tr>
+                    <td>Offense Games</td>
+                    <td>{{offenseGames}}</td>
+                </tr>
+                <tr>
+                    <td>Offense Win Percentage</td>
+                    <td>{{offensiveWinPercentage}}%</td>
+                </tr>
+                <tr>
+                    <td>Defense Wins</td>
+                    <td>{{defenseWins}}</td>
+                </tr>
+                <tr>
+                    <td>Defense Games</td>
+                    <td>{{defenseGames}}</td>
+                </tr>
+                <tr>
+                    <td>Defense Win Percentage</td>
+                    <td>{{defensiveWinPercentage}}%</td>
+                </tr>
+                <tr>
+                    <td>Buddy</td>
+                    <td></td>    
+                </tr>
+                <tr>
+                    <td>Nemisis</td>
+                    <td></td>    
+                </tr>
+                <tr>
+                    <td>Most Frequent Partner</td>
+                    <td></td>    
+                </tr>                
+            </tbody>
+        </table>
+
     </div>
     <div class="col-md-8 col-sm-12"> 
         <div class="row">   
-            <h2>Performace (Last 30 Days)</h2>
+            <h2>Performance (Last 30 Days)</h2>
             <div class="well col-md-6 text-center">
                 <b>Wins/Losses Graph</b>
             </div>
@@ -38,32 +97,33 @@
                 <b>Elo Graph</b>
             </div>
         </div>   
-        <div class="row"> 
-            <h2>Match History</h2> 
-            <div style="overflow-x:auto">
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Team 1 (Offense)</th>
-                        <th>Team 1 (Defense)</th>
-                        <th>Team 2 (Offense)</th>
-                        <th>Team 2 (Defense)</th>
-                        <th>Winner</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let match of matchstats" [ngClass]="(didUserWin(match))?'win':'loss'">
-                        <td>{{(match.mTime).getMonth() + 1 + '/'+(match.mTime).getDate()+ '/' + (match.mTime).getFullYear()}}</td>                            
-                        <td>{{match.tOneOff}}</td>
-                        <td>{{match.tOneDef}}</td>
-                        <td>{{match.tTwoOff}}</td>
-                        <td>{{match.tTwoDef}}</td>
-                        <td>{{match.tOneWin ? "Team 1":"Team 2"}}</td>
-                    </tr>
-                    </tbody>
-                </table> 
-            </div>
-        </div>    
+            
     </div>
 </div>
+<div class="row"> 
+        <h2>Match History</h2> 
+        <div style="overflow-x:auto">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Team 1 (Offense)</th>
+                    <th>Team 1 (Defense)</th>
+                    <th>Team 2 (Offense)</th>
+                    <th>Team 2 (Defense)</th>
+                    <th>Winner</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let match of matchstats" [ngClass]="(didUserWin(match))?'win':'loss'">
+                    <td>{{(match.mTime).getMonth() + 1 + '/'+(match.mTime).getDate()+ '/' + (match.mTime).getFullYear()}}</td>                            
+                    <td>{{match.tOneOff}}</td>
+                    <td>{{match.tOneDef}}</td>
+                    <td>{{match.tTwoOff}}</td>
+                    <td>{{match.tTwoDef}}</td>
+                    <td>{{match.tOneWin ? "Team 1":"Team 2"}}</td>
+                </tr>
+                </tbody>
+            </table> 
+        </div>
+    </div>

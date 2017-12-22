@@ -11,11 +11,11 @@ Meteor.publish('profile', function(user:string) {
     "$or": [{
       tOneOff: {$regex : user, $options: "i"}
     }, {
-      tOnedef: {$regex : user, $options: "i"}
+      tOneDef: {$regex : user, $options: "i"}
     },{
       tTwoOff: {$regex : user, $options: "i"}
     }, {
-      tTwodef: {$regex : user, $options: "i"}
+      tTwoDef: {$regex : user, $options: "i"}
     }]
   });
 });
