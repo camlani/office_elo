@@ -19,12 +19,14 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
     countsSubscription: Subscription;
     matchSubscription: Subscription;
     userSubscription: Subscription;
+    matchUsersSubscription: Subscription;
     matchCountNum: number;
     totalPlayersNum: number;
 
     searchValue:string;
     searchSubscription: Subscription;
     users: Meteor.User[];
+    matchUsers:any;
 
     constructor(
       private router: Router,
@@ -36,6 +38,13 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
         this.matchSubscription = TableCounts.find({tableName:'MatchStats'}).subscribe(x => this.matchCountNum = x[0].entryCount);
         this.userSubscription = TableCounts.find({tableName:'users'}).subscribe(x => this.totalPlayersNum = x[0].entryCount);  
       });
+      //
+      // Meteor.call('allPlayersInMatches',{}, (data)=>{
+      //   if(data){
+      //     console.log(data);
+      //     this.matchUsers = data;
+      //   }
+      // });
     }
 
     ngOnDestroy() {
@@ -62,6 +71,7 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
     }
     
     search() {
+      //console.log("We are in search")
       if (this.searchValue && this.searchValue.length > 1 && this.searchValue.trim().length) {
         Meteor.subscribe("users");
         this.users = Meteor.users.find({
@@ -71,6 +81,19 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
               displayname: {$regex : this.searchValue, $options: "i"}
           }]}
         ).fetch();
+
+        //console.log(this.matchUsers)
+        if(this.matchUsers){
+          var re = new RegExp(this.searchValue);
+          console.log("Good to go");
+          // this.matchUsers.forEach(element => {
+          //   if(re.test(element)){
+          //     this.users.push(element)
+          //   }
+          // });
+        }
+
+
       } else {
         this.users = null;
       }
