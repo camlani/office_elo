@@ -28,6 +28,9 @@ import { MeteorObservable } from 'meteor-rxjs';
     defenseWins = 0;
     offensiveWinPercentage = 0;
     defensiveWinPercentage = 0;
+    buddy:string;
+    nemesis:string;
+    mostFrequentPartner:string;
     statsLoaded = false;
 
     matchstats: MatchStat[];
@@ -42,10 +45,7 @@ import { MeteorObservable } from 'meteor-rxjs';
         this.username = params['username'];
          
         this.matchListSubscription = MeteorObservable.subscribe('profile', this.username).subscribe(() => {
-          //console.log(this.username);
           this.matchstats = MatchStats.find({},{sort:{mTime:-1}}).fetch();
-          //this.matchstats = MatchStats.find({"tTwoDef":"Sushil"}).fetch();
-          //console.log(this.matchstats);
           this.wins = this.numberOfWins(this.matchstats);
           this.losses = this.numberOfLosses(this.matchstats);
           this.winLossRatio = +(this.wins / this.losses).toFixed(2);
@@ -55,22 +55,41 @@ import { MeteorObservable } from 'meteor-rxjs';
           this.defensiveWinPercentage = +((this.defenseWins / (this.defenseGames))*100).toFixed(2);
           this.totalGamesPlayed = this.matchstats.length;
 
+          MeteorObservable.call("getUsersBuddy", this.username).subscribe((response) => {
+            this.buddy = String(response);
+          }, (err) => {
+            console.log(err);
+          });
+
+          MeteorObservable.call("getUsersNemesis", this.username).subscribe((response) => {
+            this.nemesis = String(response);
+          }, (err) => {
+            console.log(err);
+          });
+
+          MeteorObservable.call("getMostFrequentPartner", this.username).subscribe((response) => {
+            this.mostFrequentPartner = String(response);
+          }, (err) => {
+            console.log(err);
+          });
+         
+
           this.statsLoaded = true;
         });
 
 
-         Meteor.subscribe("users");
-         this.profile = Meteor.users.find({ username: this.username }).fetch()[0];
-         if (this.profile){
-          this.email = this.profile.emails[0].address;
-          this.displayName = this.profile.displayname !== "" ? this.profile.displayname : "N/A" ;
-         } else {
-          this.email = "Loading...";
-          this.displayName = "Loading...";
-         }
+        Meteor.subscribe("users");
+        this.profile = Meteor.users.find({ username: this.username }).fetch()[0];
+        if (this.profile){
+        this.email = this.profile.emails[0].address;
+        this.displayName = this.profile.displayname !== "" ? this.profile.displayname : "N/A" ;
+        } else {
+        this.email = "Loading...";
+        this.displayName = "Loading...";
+        }
 
-        console.log(this.profile);
-         // In a real app: dispatch action to load the details here.
+        // console.log(this.profile);
+        // In a real app: dispatch action to load the details here.
          
       });
     }
