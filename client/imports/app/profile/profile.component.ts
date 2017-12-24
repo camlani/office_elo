@@ -80,11 +80,13 @@ import { MeteorObservable } from 'meteor-rxjs';
         Meteor.subscribe("users");
         this.profile = Meteor.users.find({ username: this.username }).fetch()[0];
         if (this.profile){
-        this.email = this.profile.emails[0].address;
-        this.displayName = this.profile.displayname !== "" ? this.profile.displayname : "N/A" ;
+          if(this.profile.emails){
+            this.email = this.profile.emails[0].address;
+          }
+          this.displayName = this.profile.displayname !== "" ? this.profile.displayname : "N/A" ;
         } else {
-        this.email = "Loading...";
-        this.displayName = "Loading...";
+          this.email = "Loading...";
+          this.displayName = "Loading...";
         }
 
         // console.log(this.profile);

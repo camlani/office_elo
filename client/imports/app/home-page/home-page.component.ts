@@ -38,7 +38,16 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
         this.matchSubscription = TableCounts.find({tableName:'MatchStats'}).subscribe(x => this.matchCountNum = x[0].entryCount);
         this.userSubscription = TableCounts.find({tableName:'users'}).subscribe(x => this.totalPlayersNum = x[0].entryCount);  
       });
-      //
+      //MeteorObservable.call('allPlayersInMatches')
+      MeteorObservable.call('allPlayersInMatches').subscribe((response) => {
+        // Handle success and response from server!
+        this.matchUsers = response;
+        //console.log(this.matchUsers);
+        
+     }, (err) => {
+       // Handle error
+       console.log(err);
+     });
       // Meteor.call('allPlayersInMatches',{}, (data)=>{
       //   if(data){
       //     console.log(data);
@@ -85,12 +94,17 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
         //console.log(this.matchUsers)
         if(this.matchUsers){
           var re = new RegExp(this.searchValue);
-          console.log("Good to go");
-          // this.matchUsers.forEach(element => {
-          //   if(re.test(element)){
-          //     this.users.push(element)
-          //   }
-          // });
+          //console.log("Good to go");
+          this.matchUsers.forEach(element => {
+            //console.log(element);
+            if(re.test(element)){
+              console.log("matches regex" + " " + element + " "+ this.searchValue);
+              var insertObject = {
+                username : element
+              }
+              this.users.push(insertObject)
+            }
+          });
         }
 
 

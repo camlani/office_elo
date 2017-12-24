@@ -9,7 +9,7 @@ Meteor.methods({
         result = result.concat(distinct('tTwoOff'));
         result = result.concat(distinct('tOneDef'));
         result = result.concat(distinct('tTwoDef'));
-        //onsole.log(result);
+        //console.log(result);
         
         return _.uniq(result);
         
