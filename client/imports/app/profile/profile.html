@@ -116,10 +116,10 @@
                 <tbody>
                 <tr *ngFor="let match of matchstats" [ngClass]="(didUserWin(match))?'win':'loss'">
                     <td>{{(match.mTime).getMonth() + 1 + '/'+(match.mTime).getDate()+ '/' + (match.mTime).getFullYear()}}</td>                            
-                    <td>{{match.tOneOff}}</td>
-                    <td>{{match.tOneDef}}</td>
-                    <td>{{match.tTwoOff}}</td>
-                    <td>{{match.tTwoDef}}</td>
+                    <td><a routerLink="/profile/{{match.tOneOff}}">{{match.tOneOff}}</a></td>
+                    <td><a routerLink="/profile/{{match.tOneDef}}">{{match.tOneDef}}</a></td>
+                    <td><a routerLink="/profile/{{match.tTwoOff}}">{{match.tTwoOff}}</a></td>
+                    <td><a routerLink="/profile/{{match.tTwoDef}}">{{match.tTwoDef}}</a></td>
                     <td>{{match.tOneWin ? "Team 1":"Team 2"}}</td>
                 </tr>
                 </tbody>

@@ -56,24 +56,23 @@ import { MeteorObservable } from 'meteor-rxjs';
           this.totalGamesPlayed = this.matchstats.length;
 
           MeteorObservable.call("getUsersBuddy", this.username).subscribe((response) => {
-            this.buddy = String(response);
+            this.buddy = (String(response) != "undefined" ? String(response) : "N/A");
           }, (err) => {
             console.log(err);
           });
 
           MeteorObservable.call("getUsersNemesis", this.username).subscribe((response) => {
-            this.nemesis = String(response);
+            this.nemesis = (String(response) != "undefined" ? String(response) : "N/A");
           }, (err) => {
             console.log(err);
           });
 
           MeteorObservable.call("getMostFrequentPartner", this.username).subscribe((response) => {
-            this.mostFrequentPartner = String(response);
+            this.mostFrequentPartner = (String(response) != "undefined" ? String(response) : "N/A");
           }, (err) => {
             console.log(err);
           });
          
-
           this.statsLoaded = true;
         });
 

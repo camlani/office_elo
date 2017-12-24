@@ -29,6 +29,13 @@ export class AppComponent implements OnInit, OnDestroy {
         .filter((route) => route.outlet === 'primary')
         .mergeMap((route) => route.data)
         .subscribe((event) => this.titleService.setTitle(event['title']));
+    
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0)
+    });
   }
   ngOnDestroy() {
     this.titleChangeSubscription.unsubscribe();
