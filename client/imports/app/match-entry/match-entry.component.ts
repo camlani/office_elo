@@ -32,9 +32,9 @@ import { Meteor } from 'meteor/meteor';
 
     //array for initialization
     result = ['No', 'Yes'];
-    winner = ['Team 1', 'Team 2'];
+    winner = ['', 'Team 1', 'Team 2'];
 
-    score =[10,9,8,7,6,5,4,3,2,1,0];
+    score =['',10,9,8,7,6,5,4,3,2,1,0];
 
     formData = new matchEntryForm("", "", "", "",this.result[0], this.result[0],"",null,null,this.user);
 
@@ -82,6 +82,7 @@ import { Meteor } from 'meteor/meteor';
         Meteor.call('addMatchStats', objecttoInsert);
         this.formData = new matchEntryForm("", "", "", "",this.result[0], this.result[0],"",null,null,this.user);
 
+        window.scrollTo(0, 0);
     } 
 
     search(searchValue:string, formInputBox:string) {
