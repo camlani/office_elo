@@ -98,11 +98,20 @@ import { TableCounts } from '../../../../imports/collections/tableCounts';
           this.matchUsers.forEach(element => {
             //console.log(element);
             if(re.test(element)){
-              console.log("matches regex" + " " + element + " "+ this.searchValue);
+              //console.log("matches regex" + " " + element + " "+ this.searchValue);
               var insertObject = {
                 username : element
               }
-              this.users.push(insertObject)
+              var contains = false;
+              this.users.forEach(valElement => {
+                  //console.log(element + " " + valElement)
+                  if(valElement.username === element){
+                      contains = true;
+                  }
+              });
+              if(!contains){
+                  this.users.push(insertObject)
+              }  
             }
           });
         }

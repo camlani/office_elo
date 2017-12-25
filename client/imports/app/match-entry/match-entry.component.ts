@@ -5,6 +5,8 @@ import { matchEntryForm } from './match-entry-form'
 
 import { Meteor } from 'meteor/meteor';
 
+import { MeteorObservable } from 'meteor-rxjs';
+
 @Component({
     selector: 'match-entry',
     templateUrl: 'match-entry.html',
@@ -22,6 +24,8 @@ import { Meteor } from 'meteor/meteor';
     wScore: number;
     lScore: number;
     user: Meteor.User;
+    matchUsers:any;
+    
 
     tOneOffenders: Meteor.User[];
     tOneDefenders: Meteor.User[];
@@ -40,6 +44,15 @@ import { Meteor } from 'meteor/meteor';
 
     ngOnInit(){
         //console.log(this.user);
+        MeteorObservable.call('allPlayersInMatches').subscribe((response) => {
+            // Handle success and response from server!
+            this.matchUsers = response;
+            //console.log(this.matchUsers);
+            
+         }, (err) => {
+           // Handle error
+           console.log(err);
+         });
     }
 
     onSubmit(){
@@ -98,6 +111,28 @@ import { Meteor } from 'meteor/meteor';
                         displayname: {$regex : searchValue, $options: "i"}
                     }]}
                   ).fetch();
+                  if(this.matchUsers){
+                    var re = new RegExp(searchValue);
+                    //console.log("Good to go");
+                    this.matchUsers.forEach(element => {
+                      //console.log(element);
+                      if(re.test(element)){
+                        //console.log("matches regex" + " " + element + " "+ searchValue);
+                        var insertObject = {
+                          username : element
+                        }
+                        var contains = false;
+                        this.tOneOffenders.forEach(valElement => {
+                            if(valElement.username === element){
+                                contains = true;
+                            }
+                        });
+                        if(!contains){
+                            this.tOneOffenders.push(insertObject)
+                        }  
+                      } 
+                    });
+                  }
                break; 
             } 
             case "tOneDef": { 
@@ -108,6 +143,29 @@ import { Meteor } from 'meteor/meteor';
                         displayname: {$regex : searchValue, $options: "i"}
                     }]}
                   ).fetch();
+                  if(this.matchUsers){
+                    var re = new RegExp(searchValue);
+                    //console.log("Good to go");
+                    this.matchUsers.forEach(element => {
+                      //console.log(element);
+                      if(re.test(element)){
+                        //console.log("matches regex" + " " + element + " "+ searchValue);
+                        var insertObject = {
+                          username : element
+                        }
+                        var contains = false;
+                        this.tOneDefenders.forEach(valElement => {
+                            //console.log(element + " " + valElement)
+                            if(valElement.username === element){
+                                contains = true;
+                            }
+                        });
+                        if(!contains){
+                            this.tOneDefenders.push(insertObject)
+                        }  
+                      } 
+                    });
+                  }
                break; 
             } 
             case "tTwoOff": { 
@@ -118,6 +176,28 @@ import { Meteor } from 'meteor/meteor';
                         displayname: {$regex : searchValue, $options: "i"}
                     }]}
                   ).fetch();
+                  if(this.matchUsers){
+                    var re = new RegExp(searchValue);
+                    //console.log("Good to go");
+                    this.matchUsers.forEach(element => {
+                      //console.log(element);
+                      if(re.test(element)){
+                        //console.log("matches regex" + " " + element + " "+ searchValue);
+                        var insertObject = {
+                          username : element
+                        }
+                        var contains = false;
+                        this.tTwoOffenders.forEach(valElement => {
+                            if(valElement.username === element){
+                                contains = true;
+                            }
+                        });
+                        if(!contains){
+                            this.tTwoOffenders.push(insertObject)
+                        }  
+                      } 
+                    });
+                  }
                 break; 
              } 
              case "tTwoDef": { 
@@ -127,7 +207,29 @@ import { Meteor } from 'meteor/meteor';
                     }, {
                         displayname: {$regex : searchValue, $options: "i"}
                     }]}
-                  ).fetch(); 
+                  ).fetch();
+                  if(this.matchUsers){
+                    var re = new RegExp(searchValue);
+                    //console.log("Good to go");
+                    this.matchUsers.forEach(element => {
+                      //console.log(element);
+                      if(re.test(element)){
+                        //console.log("matches regex" + " " + element + " "+ searchValue);
+                        var insertObject = {
+                          username : element
+                        }
+                        var contains = false;
+                        this.tTwoDefenders.forEach(valElement => {
+                            if(valElement.username === element){
+                                contains = true;
+                            }
+                        });
+                        if(!contains){
+                            this.tTwoDefenders.push(insertObject)
+                        }  
+                      } 
+                    });
+                  } 
                 break; 
              } 
          } 
