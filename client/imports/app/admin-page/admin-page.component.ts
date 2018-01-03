@@ -39,7 +39,11 @@ import { MatchStat } from '../../../../imports/models/matchstat';
       }
     }
     clickEditMatches(){
-      this.editMatches = true;
+      if(this.editMatches){
+        this.editMatches = false;
+      } else {
+        this.editMatches = true;
+      }
     }
     //Need to have the add new location drop down
     //then add the slider etc.
